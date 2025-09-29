@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de {{ author.username }}</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        .author-details { 
+            background: #f9f9f9; 
+            padding: 20px; 
+            margin: 20px 0; 
+            border-radius: 8px;
+            max-width: 500px;
+        }
+        .author-name { 
+            font-size: 1.5em;
+            font-weight: bold; 
+            color: #2c3e50; 
+            margin-bottom: 15px;
+        }
+        .author-info {
+            margin-bottom: 10px;
+        }
+        .author-photo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        .back-link {
+            display: inline-block;
+            background: #7f8c8d;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 3px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Détails de l'Auteur</h1>
+    
+    {% if author is defined %}
+        <div class="author-details">
+            <!-- Photo de l'auteur -->
+            {% if author.picture %}
+                <img src="{{ author.picture }}" alt="{{ author.username }}" class="author-photo">
+            {% endif %}
+            
+            <div class="author-name">{{ author.username|upper }}</div>
+            
+            <div class="author-info">
+                <strong>Email :</strong> {{ author.email }}
+            </div>
+            
+            <div class="author-info">
+                <strong>Nombre de livres :</strong> {{ author.nb_books }}
+            </div>
+            
+            <div class="author-info">
+                <strong>ID :</strong> {{ author.id }}
+            </div>
+        </div>
+    {% else %}
+        <p>Auteur non trouvé.</p>
+    {% endif %}
+
+    <a href="{{ path('list_authors') }}" class="back-link">
+        ← Retour à la liste
+    </a>
+</body>
+</html>
